@@ -26,6 +26,8 @@ class Point:
         dx = abs(self.x - p.x)
         dy = abs(self.y - p.y)
 
+        return (dy**2 + dy**2) ** 0.5
+
 class Cloud:
     def __init__(self):
         self.cloud = set()
