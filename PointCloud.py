@@ -41,23 +41,28 @@ class Cloud:
 debug_point = True
 if debug_point:
     print('Point class debug ON')
-    print(format('EPSILON: {e}', e = Point.EPSILON))
+    print('EPSILON: {e}'.format(e = Point.EPSILON))
 
-    origin = Point(0.0, 0.0)
-    p1 = Point(0.0, 4.0)
-    p2 = Point(3.0000001, 3.9999999)
-    p3 = Point(3.0, 4.0)
-    p4 = Point(0.0,5.0)
-    p5 = Point(12.0,0.0)
+    origin  = Point(0.0, 0.0)
+    p1      = Point(0.0, 4.0)
+    p2      = Point(3.0000001, 3.9999999)
+    p3      = Point(3.0, 4.0)
+    p4      = Point(0.0, 5.0)
+    p5      = Point(12.0, 0.0)
 
-    print("origin: {p}", p = origin)
-    print("p1: {p}", p = p1)
-    print("p2: {p}", p = p2)
-    print("p3: {p}", p = p3)
-    print("p4: {p}", p = p4)
-    print("p5: {p}", p = p5)
+    print("origin: {p}".format(p = origin))
+    print("p1: {p}".format(p = p1))
+    print("p2: {p}".format(p = p2))
+    print("p3: {p}".format(p = p3))
+    print("p4: {p}".format(p = p4))
+    print("p5: {p}".format(p = p5))
 
-else: print('Point class debug OFF')
+    if p2 == p3:
+        print('{p2} equals {p3}'.format(p2 = p2, p3 = p3))
+    else:
+        print('{p2} does not equal {p3}'.format(p2 = p2, p3 = p3))
+else:
+    print('Point class debug OFF')
 
 ####################
 # TEST CLOUD CLASS #
