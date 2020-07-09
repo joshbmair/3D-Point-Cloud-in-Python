@@ -46,6 +46,20 @@ class Cloud:
         if not self.has_point(p):
             self.cloud.add(p)
 
+    # Returns an array of values: left, right, top, and bottom of all points
+
+    def extremes(self):
+        return 0
+
+    def center_p(self):
+        return 0
+
+    def min_dist(self):
+        return 0
+
+    def crop(self):
+        return 0
+
 ####################
 # TEST POINT CLASS #
 ####################
