@@ -61,6 +61,8 @@ if debug_point:
         print('{p2} equals {p3}'.format(p2 = p2, p3 = p3))
     else:
         print('{p2} does not equal {p3}'.format(p2 = p2, p3 = p3))
+
+    print('Euclidean distance between {origin} and {p1}: {dist}'.format(origin=origin, p1=p1, dist=origin.euclid_dist(p1)))
 else:
     print('Point class debug OFF')
 
