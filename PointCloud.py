@@ -33,11 +33,24 @@ class Cloud:
     def __init__(self):
         self.cloud = set()
 
+    def is_empty(self):
+        return len(self.cloud) == 0
+
+    def size(self):
+        return len(self.cloud)
+
+    def has_point(self, p):
+        return p in self.cloud
+
+    def add_point(self, p):
+        if not self.has_point(p):
+            self.cloud.add(p)
+
 ####################
 # TEST POINT CLASS #
 ####################
 
-debug_point = True
+debug_point = False
 if debug_point:
     print('Point class debug ON')
     print('EPSILON: {e}'.format(e = Point.EPSILON))
