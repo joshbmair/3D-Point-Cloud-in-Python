@@ -2,7 +2,7 @@ debug_point = False
 debug_cloud = False
 
 class Point:
-    EPSILON = 1e-5
+    EPSILON = 1.0e-5
 
     def __init__(self, x, y):
         self.x = x
@@ -15,9 +15,8 @@ class Point:
     def get_y(self):
         return self.y
 
-    def toString(self):
-        str = '({x}, {y})'.format(self.x, self.y)
-        return str
+    def __str__(self):
+        return '({x}, {y})'.format(x=self.x, y=self.y)
 
     def __eq__(self, p):    # TODO Add feature for if p is not a point
         if abs(self.x - p.x) < Point.EPSILON and abs(self.y - p.y) < Point.EPSILON:
@@ -50,19 +49,22 @@ if debug_point:
     p4      = Point(0.0, 5.0)
     p5      = Point(12.0, 0.0)
 
-    print("origin: {p}".format(p = origin))
-    print("p1: {p}".format(p = p1))
-    print("p2: {p}".format(p = p2))
-    print("p3: {p}".format(p = p3))
-    print("p4: {p}".format(p = p4))
-    print("p5: {p}".format(p = p5))
+    print("origin: {p}".format(p=origin))
+    print("p1: {p}".format(p=p1))
+    print("p2: {p}".format(p=p2))
+    print("p3: {p}".format(p=p3))
+    print("p4: {p}".format(p=p4))
+    print("p5: {p}".format(p=p5))
 
     if p2 == p3:
-        print('{p2} equals {p3}'.format(p2 = p2, p3 = p3))
+        print('{p2} equals {p3}'.format(p2=p2, p3=p3))
     else:
-        print('{p2} does not equal {p3}'.format(p2 = p2, p3 = p3))
+        print('{p2} does not equal {p3}'.format(p2=p2, p3=p3))
 
     print('Euclidean distance between {origin} and {p1}: {dist}'.format(origin=origin, p1=p1, dist=origin.euclid_dist(p1)))
+    print('Euclidean distance between {p1} and {p3}: {dist}'.format(p1=p1, p3=p3, dist=p1.euclid_dist(p3)))
+    print('Euclidean distance between {origin} and {p3}: {dist}'.format(origin=origin, p3=p3, dist=origin.euclid_dist(p3)))
+    print('Euclidean distance between {p4} and {p5}: {dist}'.format(p4=p4, p5=p5, dist=p4.euclid_dist(p5)))
 else:
     print('Point class debug OFF')
 
