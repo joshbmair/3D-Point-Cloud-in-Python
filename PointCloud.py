@@ -47,9 +47,31 @@ class Cloud:
             self.cloud.add(p)
 
     # Returns an array of values: left, right, top, and bottom of all points
-
+    # If cloud is empty, returns None
     def extremes(self):
-        return 0
+        if self.is_empty: return None
+        
+        left = 0.0; min_x = 0.0
+        for p in self.cloud:
+            if p.x < min_x:
+                left = p.x
+
+        right = 0.0; max_x = 0.0
+        for p in self.cloud:
+            if p.x > max_x:
+                right = p.x
+
+        top = 0.0; max_y = 0.0
+        for p in self.cloud:
+            if p.x > max_y:
+                top = p.x
+
+        bottom = 0.0; min_y = 0.0
+        for p in self.cloud:
+            if p.x < min_y:
+                bottom = p.x
+
+        return [left, right, top, bottom]
 
     def center_p(self):
         return 0
