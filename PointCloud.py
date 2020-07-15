@@ -1,3 +1,5 @@
+import random
+
 debug_point = False
 debug_cloud = False
 
@@ -7,7 +9,6 @@ class Point:
     def __init__(self, x, y):
         self.x = x
         self.y = y
-        # self.EPSILON = 1e-5
 
     def get_x(self):
         return self.x
@@ -31,50 +32,51 @@ class Point:
 
 class Cloud:
     def __init__(self):
-        self.cloud = set()
+        self.points = set()
 
     def is_empty(self):
-        return len(self.cloud) == 0
+        return len(self.points) == 0
 
     def size(self):
-        return len(self.cloud)
+        return len(self.points)
 
     def has_point(self, p):
-        return p in self.cloud
+        return p in self.points
 
     def add_point(self, p):
         if not self.has_point(p):
-            self.cloud.add(p)
+            self.points.add(p)
 
-    # Returns an array of values: left, right, top, and bottom of all points
+    # Returns an array of extremes: left, right, top, and bottom of all points in cloud
     # If cloud is empty, returns None
     def extremes(self):
         if self.is_empty: return None
         
-        left = 0.0; min_x = 0.0
-        for p in self.cloud:
+        cloud = self.points
+        min_x = max_x = min_y = max_y = random.choice(cloud)
+        
+        for p in cloud:
             if p.x < min_x:
                 left = p.x
 
-        right = 0.0; max_x = 0.0
-        for p in self.cloud:
+        for p in cloud:
             if p.x > max_x:
                 right = p.x
 
-        top = 0.0; max_y = 0.0
-        for p in self.cloud:
+        for p in cloud:
             if p.x > max_y:
                 top = p.x
 
-        bottom = 0.0; min_y = 0.0
-        for p in self.cloud:
+        for p in cloud:
             if p.x < min_y:
                 bottom = p.x
 
         return [left, right, top, bottom]
 
     def center_p(self):
-        return 0
+        for p in self.points:
+            total += p.x
+        return total / len(self.points)
 
     def min_dist(self):
         return 0
@@ -124,3 +126,4 @@ else:
 # debug_cloud = False
 # if debug_cloud:
 #     print("Cloud class debug ON")
+#     cloud = Cloud()
