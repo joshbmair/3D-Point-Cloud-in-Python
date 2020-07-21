@@ -100,8 +100,27 @@ class Cloud:
 
         return min_dist
 
-    def crop(self):
-        return 0
+    def crop(self, p0, p1):
+        if p0.get_x() < p1.get_x():
+            min_x = p0.get_x()
+            max_x = p1.get_x()
+        else:
+            min_x = p1.get_x()
+            max_x = p0.get_x()
+        
+        if p0.get_y() < p1.get_y():
+            min_y = p0.get_y()
+            max_y = p1.get_y()
+        else:
+            min_y = p1.get_y()
+            max_y = p0.get_y()
+
+        cloud = self.points
+        for p in cloud:
+            if p.get_x() < min_x or p.get_x() > max_x:
+                cloud.remove(p)
+            if p.get_y() < min_y or p.get_y() > max_y:
+                cloud.remove(p)
 
 ####################
 # TEST POINT CLASS #
