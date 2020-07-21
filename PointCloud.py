@@ -18,7 +18,7 @@ class Point:
         return self.y
 
     def __str__(self):
-        return '({x}, {y})'.format(x=self.x, y=self.y)
+        return f'({self.x}, {self.y})'
 
     def __eq__(self, p):    # TODO Add feature for if p is not a point
         if abs(self.x - p.x) < Point.EPSILON and abs(self.y - p.y) < Point.EPSILON:
@@ -135,7 +135,7 @@ class Cloud:
 debug_point = False
 if debug_point:
     print('Point class debug ON')
-    print('EPSILON: {e}'.format(e = Point.EPSILON))
+    print(f'EPSILON: {Point.EPSILON}')
 
     origin  = Point(0.0, 0.0)
     p1      = Point(0.0, 4.0)
@@ -144,22 +144,22 @@ if debug_point:
     p4      = Point(0.0, 5.0)
     p5      = Point(12.0, 0.0)
 
-    print("origin: {p}".format(p=origin))
-    print("p1: {p}".format(p=p1))
-    print("p2: {p}".format(p=p2))
-    print("p3: {p}".format(p=p3))
-    print("p4: {p}".format(p=p4))
-    print("p5: {p}".format(p=p5))
+    print(f'origin: {origin}')
+    print(f'p1: {p1}')
+    print(f'p2: {p2}')
+    print(f'p3: {p3}')
+    print(f'p4: {p4}')
+    print(f'p5: {p5}')
 
     if p2 == p3:
-        print('{p2} equals {p3}'.format(p2=p2, p3=p3))
+        print(f'{p2} equals {p3}')
     else:
-        print('{p2} does not equal {p3}'.format(p2=p2, p3=p3))
+        print(f'{p2} does not equal {p3}')
 
-    print('Euclidean distance between {origin} and {p1}: {dist}'.format(origin=origin, p1=p1, dist=origin.euclid_dist(p1)))
-    print('Euclidean distance between {p1} and {p3}: {dist}'.format(p1=p1, p3=p3, dist=p1.euclid_dist(p3)))
-    print('Euclidean distance between {origin} and {p3}: {dist}'.format(origin=origin, p3=p3, dist=origin.euclid_dist(p3)))
-    print('Euclidean distance between {p4} and {p5}: {dist}'.format(p4=p4, p5=p5, dist=p4.euclid_dist(p5)))
+    print(f'Euclidean distance between {origin} and {p1}: {origin.euclid_dist(p1)}')
+    print(f'Euclidean distance between {p1} and {p3}: {p1.euclid_dist(p3)}')
+    print(f'Euclidean distance between {origin} and {p3}: {origin.euclid_dist(p3)}')
+    print(f'Euclidean distance between {p4} and {p5}: {p4.euclid_dist(p5)}')
 else:
     print('Point class debug OFF')
 
@@ -171,7 +171,7 @@ debug_cloud = True
 if debug_cloud:
     cloud = Cloud()
 
-    print("Cloud class debug ON")
+    print('Cloud class debug ON')
     print('Cloud: {c}'.format(c=cloud))
 
     if not cloud.is_empty():
@@ -195,25 +195,25 @@ if debug_cloud:
     p33 = Point(3.0, 3.0)
     cloud.add_point(p33)
 
-    print('Cloud 1 {c1}'.format(c1=cloud))
-    print('Center point in cloud: {center}'.format(center=cloud.center_p()))
-    print('Cloud: {c}'.format(c=cloud))
-    print('Cloud 2: {c}'.format(c=cloud))
+    print(f'Cloud 1 {cloud}'.format(c1=cloud))
+    print(f'Center point in cloud: {cloud.center_p()}')
+    print(f'Cloud: {cloud}')
+    print(f'Cloud 2: {cloud}')
 
     p77 = Point(7, 7)
     if cloud.has_point(p77):
-        print('Error: point {p77} should not be in cloud'.format(p77=p77))
+        print(f'Error: point {p77} should not be in cloud')
     else:
-        print('OK: point {p77} not in cloud'.format(p77=p77))
+        print(f'OK: point {p77} not in cloud')
     
     extrs = cloud.extremes()
     if(extrs != None):
-        print('Left: {l}'.format(l=extrs[0]))
-        print('Right: {r}'.format(r=extrs[1]))
-        print('Top: {t}'.format(t=extrs[2]))
-        print('Bottom: {b}'.format(b=extrs[3]))
+        print(f'Left: {extrs[0]}')
+        print(f'Right: {extrs[1]}')
+        print(f'Top: {extrs[2]}')
+        print(f'Bottom: {extrs[3]}')
     
     min_d = cloud.min_dist()
-    print(f'min dist in cloud: %5.3f \n', min_d)
+    print(f'min dist in cloud: %5.3f{min_d}\n')
 else:
     print('Cloud class debug OFF')
