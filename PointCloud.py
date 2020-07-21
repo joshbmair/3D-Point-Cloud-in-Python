@@ -39,7 +39,7 @@ class Cloud:
         self.points = set()
 
     def __str__(self):
-        return '{c}'.format(c=list(self.points))
+        return f'{self.points}'
 
     def is_empty(self):
         return len(self.points) == 0
@@ -48,7 +48,10 @@ class Cloud:
         return len(self.points)
 
     def has_point(self, p):
-        return p in self.points
+        for point in self.points:
+            if p.x == point.x and p.y == point.y:
+                return True
+        return False
 
     def add_point(self, p):
         if not self.has_point(p):
@@ -172,7 +175,7 @@ if debug_cloud:
     cloud = Cloud()
 
     print('Cloud class debug ON')
-    print('Cloud: {c}'.format(c=cloud))
+    print(f'Cloud: {cloud}')
 
     if not cloud.is_empty():
         print('Error: cloud should be empty!')
@@ -195,7 +198,7 @@ if debug_cloud:
     p33 = Point(3.0, 3.0)
     cloud.add_point(p33)
 
-    print(f'Cloud 1 {cloud}'.format(c1=cloud))
+    print(f'Cloud 1 {cloud}')
     print(f'Center point in cloud: {cloud.center_p()}')
     print(f'Cloud: {cloud}')
     print(f'Cloud 2: {cloud}')
