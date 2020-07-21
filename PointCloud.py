@@ -1,3 +1,4 @@
+import sys
 import random
 
 debug_point = False
@@ -74,12 +75,30 @@ class Cloud:
         return [left, right, top, bottom]
 
     def center_p(self):
-        for p in self.points:
-            total += p.x
-        return total / len(self.points)
+        cloud = self.points
+
+        for p in cloud:
+            total_x += p.x
+        avg_x = total_x / len(cloud)
+
+        for p in cloud:
+            total_y += p.y
+        avg_y = total_y / len(cloud)
+
+        return Point(avg_x, avg_y)
 
     def min_dist(self):
-        return 0
+        if self.size() < 2: return 0.0
+
+        cloud = self.points
+        min_dist = float(sys.maxsize)
+
+        for p0 in cloud:
+            for p1 in cloud:
+                if p0.euclid_dist(p1) < min_dist:
+                    min_dist = p0.euclid_dist(p1)
+
+        return min_dist
 
     def crop(self):
         return 0
