@@ -25,6 +25,9 @@ class Point:
             return True
         else: return False
 
+    def __ne__(self, p):
+        return not self.__eq__(p)
+
     def euclid_dist(self, p):
         dx = abs(self.x - p.x)
         dy = abs(self.y - p.y)
@@ -34,6 +37,9 @@ class Point:
 class Cloud:
     def __init__(self):
         self.points = set()
+
+    def __str__(self):
+        return '{c}'.format(c=list(self.points))
 
     def is_empty(self):
         return len(self.points) == 0
@@ -95,7 +101,7 @@ class Cloud:
 
         for p0 in cloud:
             for p1 in cloud:
-                if p0.euclid_dist(p1) < min_dist:
+                if p0.euclid_dist(p1) < min_dist and p0 != p1:
                     min_dist = p0.euclid_dist(p1)
 
         return min_dist
@@ -161,7 +167,53 @@ else:
 # TEST CLOUD CLASS #
 ####################
 
-# debug_cloud = False
-# if debug_cloud:
-#     print("Cloud class debug ON")
-#     cloud = Cloud()
+debug_cloud = True
+if debug_cloud:
+    cloud = Cloud()
+
+    print("Cloud class debug ON")
+    print('Cloud: {c}'.format(c=cloud))
+
+    if not cloud.is_empty():
+        print('Error: cloud should be empty!')
+
+    if cloud.extremes != None:
+        print('Error: extremes should be None!')
+
+    if cloud.min_dist() != 0.0:
+        print('Error: min_dist should return 0.0!')
+
+    p31 = Point(3.0, 1.0)
+    cloud.add_point(p31)
+
+    p22 = Point(2.0, 2.0)
+    cloud.add_point(p22)
+
+    p42 = Point(4.0, 2.0)
+    cloud.add_point(p42)
+
+    p33 = Point(3.0, 3.0)
+    cloud.add_point(p33)
+
+    print('Cloud 1 {c1}'.format(c1=cloud))
+    print('Center point in cloud: {center}'.format(center=cloud.center_p()))
+    print('Cloud: {c}'.format(c=cloud))
+    print('Cloud 2: {c}'.format(c=cloud))
+
+    p77 = Point(7, 7)
+    if cloud.has_point(p77):
+        print('Error: point {p77} should not be in cloud'.format(p77=p77))
+    else:
+        print('OK: point {p77} not in cloud'.format(p77=p77))
+    
+    extrs = cloud.extremes()
+    if(extrs != None):
+        print('Left: {l}'.format(l=extrs[0]))
+        print('Right: {r}'.format(r=extrs[1]))
+        print('Top: {t}'.format(t=extrs[2]))
+        print('Bottom: {b}'.format(b=extrs[3]))
+    
+    min_d = cloud.min_dist()
+    print(f'min dist in cloud: %5.3f \n', min_d)
+else:
+    print('Cloud class debug OFF')
