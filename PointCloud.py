@@ -7,9 +7,16 @@ debug_cloud = False
 class Point:
     EPSILON = 1.0e-5
 
-    def __init__(self, x, y):
-        self.x = x
-        self.y = y
+    def __init__(self, x = None, y = None):
+        if x == None and y == None:
+            self.x = x
+            self.y = y
+        elif x == None or y == None:
+            raise('Error: Value not found for x or y')
+        else:
+            self.x = 0.0
+            self.y = 0.0
+        
 
     def get_x(self):
         return self.x
@@ -21,9 +28,12 @@ class Point:
         return f'({self.x}, {self.y})'
 
     def __eq__(self, p):    # TODO Add feature for if p is not a point
-        if abs(self.x - p.x) < Point.EPSILON and abs(self.y - p.y) < Point.EPSILON:
-            return True
-        else: return False
+        if isinstance(p, Point):
+            if abs(self.x - p.x) < Point.EPSILON and abs(self.y - p.y) < Point.EPSILON:
+                return True
+            else: return False
+        else:
+            return self.__eq__(point(p))
 
     def __ne__(self, p):
         return not self.__eq__(p)
@@ -84,6 +94,7 @@ class Cloud:
         return [left, right, top, bottom]
 
     def center_p(self):
+        if self.is_empty(): return None
         cloud = self.points
 
         for p in cloud:
