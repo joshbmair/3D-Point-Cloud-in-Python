@@ -7,16 +7,21 @@ debug_cloud = False
 class Point:
     EPSILON = 1.0e-5
 
+    def __hash__(self):
+        return int(f'{int(self.x)}{int(self.y)}{int(self.x**2 + self.y**2)}')
+
     def __init__(self, x = None, y = None):
         if x == None and y == None:
             self.x = x
             self.y = y
         elif x == None or y == None:
-            raise('Error: Value not found for x or y')
+            raise SyntaxError('Error: Value not found for x or y')
         else:
             self.x = 0.0
             self.y = 0.0
-        
+    
+    def __str__(self):
+        return f'({self.x}, {self.y})'
 
     def get_x(self):
         return self.x
@@ -24,16 +29,13 @@ class Point:
     def get_y(self):
         return self.y
 
-    def __str__(self):
-        return f'({self.x}, {self.y})'
-
     def __eq__(self, p):    # TODO Add feature for if p is not a point
         if isinstance(p, Point):
             if abs(self.x - p.x) < Point.EPSILON and abs(self.y - p.y) < Point.EPSILON:
                 return True
             else: return False
         else:
-            return self.__eq__(point(p))
+            return False
 
     def __ne__(self, p):
         return not self.__eq__(p)
@@ -49,7 +51,7 @@ class Cloud:
         self.points = set()
 
     def __str__(self):
-        return f'{self.points}'
+        return f'{list(self.points)}'
 
     def is_empty(self):
         return len(self.points) == 0
@@ -96,6 +98,7 @@ class Cloud:
     def center_p(self):
         if self.is_empty(): return None
         cloud = self.points
+        total_x = total_y = 0
 
         for p in cloud:
             total_x += p.x
@@ -151,7 +154,7 @@ if debug_point:
     print('Point class debug ON')
     print(f'EPSILON: {Point.EPSILON}')
 
-    origin  = Point(0.0, 0.0)
+    origin  = Point()
     p1      = Point(0.0, 4.0)
     p2      = Point(3.0000001, 3.9999999)
     p3      = Point(3.0, 4.0)
@@ -209,7 +212,7 @@ if debug_cloud:
     p33 = Point(3.0, 3.0)
     cloud.add_point(p33)
 
-    print(f'Cloud 1 {cloud}')
+    print(f'Cloud 1: {cloud}')
     print(f'Center point in cloud: {cloud.center_p()}')
     print(f'Cloud: {cloud}')
     print(f'Cloud 2: {cloud}')
