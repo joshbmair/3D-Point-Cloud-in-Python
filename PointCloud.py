@@ -29,7 +29,7 @@ class Point:
     def get_y(self):
         return self.y
 
-    def __eq__(self, p):    # TODO Add feature for if p is not a point
+    def __eq__(self, p):
         if isinstance(p, Point):
             if abs(self.x - p.x) < Point.EPSILON and abs(self.y - p.y) < Point.EPSILON:
                 return True
@@ -231,6 +231,6 @@ if debug_cloud:
         print(f'Bottom: {extrs[3]}')
     
     min_d = cloud.min_dist()
-    print(f'min dist in cloud: %5.3f{min_d}\n')
+    print(f'min dist in cloud: {min_d}') # TODO Format this to match Java version
 else:
     print('Cloud class debug OFF')
