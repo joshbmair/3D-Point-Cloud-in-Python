@@ -12,13 +12,13 @@ class Point:
 
     def __init__(self, x = None, y = None):
         if x == None and y == None:
-            self.x = x
-            self.y = y
+            self.x = 0.0
+            self.y = 0.0
         elif x == None or y == None:
             raise SyntaxError('Error: Value not found for x or y')
         else:
-            self.x = 0.0
-            self.y = 0.0
+            self.x = x
+            self.y = y
     
     def __str__(self):
         return f'({self.x}, {self.y})'
@@ -51,7 +51,7 @@ class Cloud:
         self.points = set()
 
     def __str__(self):
-        return f'{list(self.points)}'
+        return '[' + ', '.join(map(str, self.points)) + ']'
 
     def is_empty(self):
         return len(self.points) == 0
@@ -184,7 +184,7 @@ else:
 # TEST CLOUD CLASS #
 ####################
 
-debug_cloud = True
+debug_cloud = False
 if debug_cloud:
     cloud = Cloud()
 
@@ -230,7 +230,14 @@ if debug_cloud:
         print(f'Top: {extrs[2]}')
         print(f'Bottom: {extrs[3]}')
     
-    min_d = cloud.min_dist()
-    print(f'min dist in cloud: {min_d}') # TODO Format this to match Java version
+    print('min dist in cloud: {:.5f}'.format(cloud.min_dist()))
+
+    print('Test cloud with one point')
+
+    cloud1 = Cloud()
+    p = Point()
+    cloud1.add_point(p)
+
+    print('Min dist in cloud1: {:.5f}'.format(cloud1.min_dist()))
 else:
     print('Cloud class debug OFF')
