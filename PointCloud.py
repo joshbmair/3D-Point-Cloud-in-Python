@@ -118,9 +118,11 @@ class Cloud:
         return [left, right, top, bottom, front, back]
 
     def center_p(self):
-        if self.is_empty(): return None
+        if self.is_empty():
+            return None
+        
         cloud = self.points
-        total_x = total_y = 0
+        total_x = total_y = total_z = 0
 
         for p in cloud:
             total_x += p.x
@@ -130,7 +132,11 @@ class Cloud:
             total_y += p.y
         avg_y = total_y / len(cloud)
 
-        return Point(avg_x, avg_y)
+        for p in cloud:
+            total_z += p.z
+        avg_z = total_z / len(cloud)
+
+        return Point(avg_x, avg_y, avg_z)
 
     def min_dist(self):
         if self.size() < 2: return 0.0
