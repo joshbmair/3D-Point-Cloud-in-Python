@@ -193,11 +193,11 @@ if debug_point:
     print(f'EPSILON: {Point.EPSILON}')
 
     origin  = Point()
-    p1      = Point(0.0, 4.0)
-    p2      = Point(3.0000001, 3.9999999)
-    p3      = Point(3.0, 4.0)
-    p4      = Point(0.0, 5.0)
-    p5      = Point(12.0, 0.0)
+    p1      = Point(0.0, 4.0, 4.0)
+    p2      = Point(3.0000001, 3.9999999, 3.9999999)
+    p3      = Point(3.0, 4.0, 4.0)
+    p4      = Point(0.0, 5.0, 5.0)
+    p5      = Point(12.0, 0.0, 0.0)
 
     print(f'origin: {origin}')
     print(f'p1: {p1}')
@@ -222,7 +222,7 @@ else:
 # TEST CLOUD CLASS #
 ####################
 
-debug_cloud = False
+debug_cloud = True
 if debug_cloud:
     cloud = Cloud()
 
@@ -238,28 +238,28 @@ if debug_cloud:
     if cloud.min_dist() != 0.0:
         print('Error: min_dist should return 0.0!')
 
-    p31 = Point(3.0, 1.0)
-    cloud.add_point(p31)
+    p311 = Point(3.0, 1.0, 1.0)
+    cloud.add_point(p311)
 
-    p22 = Point(2.0, 2.0)
-    cloud.add_point(p22)
+    p222 = Point(2.0, 2.0, 2.0)
+    cloud.add_point(p222)
 
-    p42 = Point(4.0, 2.0)
-    cloud.add_point(p42)
+    p422 = Point(4.0, 2.0, 2.0)
+    cloud.add_point(p422)
 
-    p33 = Point(3.0, 3.0)
-    cloud.add_point(p33)
+    p333 = Point(3.0, 3.0, 3.0)
+    cloud.add_point(p333)
 
     print(f'Cloud 1: {cloud}')
     print(f'Center point in cloud: {cloud.center_p()}')
     print(f'Cloud: {cloud}')
     print(f'Cloud 2: {cloud}')
 
-    p77 = Point(7, 7)
-    if cloud.has_point(p77):
-        print(f'Error: point {p77} should not be in cloud')
+    p777 = Point(7, 7, 7)
+    if cloud.has_point(p777):
+        print(f'Error: point {p777} should not be in cloud')
     else:
-        print(f'OK: point {p77} not in cloud')
+        print(f'OK: point {p777} not in cloud')
     
     extrs = cloud.extremes()
     if(extrs != None):
