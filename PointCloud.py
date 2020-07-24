@@ -28,13 +28,7 @@ class Point:
             self.z = z
     
     def __str__(self):
-        return f'({self.x}, {self.y})'
-
-    def get_x(self):
-        return self.x
-
-    def get_y(self):
-        return self.y
+        return f'({self.x}, {self.y}, {self.z})'
 
     def __eq__(self, p):
         if isinstance(p, Point):
