@@ -21,7 +21,7 @@ class Point:
             self.y = 0.0
             self.z = 0.0
         elif x == None or y == None or z == None:
-            raise SyntaxError('Error: Value not found for x or y')
+            raise SyntaxError('Error: Value not found for x, y, or z')
         else:
             self.x = x
             self.y = y
@@ -67,7 +67,7 @@ class Cloud:
 
     def has_point(self, p):
         for point in self.points:
-            if p.x == point.x and p.y == point.y:
+            if p.x == point.x and p.y == point.y and p.z == point.z:
                 return True
         return False
 
