@@ -8,17 +8,24 @@ class Point:
     EPSILON = 1.0e-5
 
     def __hash__(self):
-        return int(f'{int(self.x)}{int(self.y)}{int(self.x**2 + self.y**2)}')
+        x = int(self.x)
+        y = int(self.y)
+        z = int(self.z)
+        s = int(self.x**2 + self.y**2 + self.z**2)
 
-    def __init__(self, x = None, y = None):
+        return int(f'{x}{y}{z}{s}')
+
+    def __init__(self, x = None, y = None, z = None):
         if x == None and y == None:
             self.x = 0.0
             self.y = 0.0
-        elif x == None or y == None:
+            self.z = 0.0
+        elif x == None or y == None or z == None:
             raise SyntaxError('Error: Value not found for x or y')
         else:
             self.x = x
             self.y = y
+            self.z = z
     
     def __str__(self):
         return f'({self.x}, {self.y})'
