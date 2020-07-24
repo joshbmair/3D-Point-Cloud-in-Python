@@ -81,25 +81,41 @@ class Cloud:
         if self.is_empty: return None
         
         cloud = self.points
-        min_x = max_x = min_y = max_y = random.choice(cloud)
+        min_x = max_x = min_y = max_y = max_z = min_z = random.choice(cloud)
+
+        for p in cloud:
+            if p.x < min_x:
+                min_x = p.x
+            if p.x > max_x:
+                max_x = p.x
+
+            if p.y > max_y:
+                max_x = p.x
+            if p.y < min_y:
+                min_y = p.y
+
+            if p.z > max_z:
+                max_z = p.z
+            if p.z < min_z:
+                min_z = p.z
         
         for p in cloud:
             if p.x < min_x:
                 left = p.x
-
-        for p in cloud:
             if p.x > max_x:
                 right = p.x
 
-        for p in cloud:
-            if p.x > max_y:
-                top = p.x
+            if p.y > max_y:
+                top = p.y
+            if p.y < min_y:
+                bottom = p.y
 
-        for p in cloud:
-            if p.x < min_y:
-                bottom = p.x
+            if p.z > max_z:
+                front = p.z
+            if p.z < min_z:
+                back = p.z
 
-        return [left, right, top, bottom]
+        return [left, right, top, bottom, front, back]
 
     def center_p(self):
         if self.is_empty(): return None
