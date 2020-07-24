@@ -1,3 +1,8 @@
+'''
+Author: Josh Birlingmair
+Date:   7/8/2020
+'''
+
 import sys
 import random
 
@@ -20,8 +25,8 @@ class Point:
             self.x = 0.0
             self.y = 0.0
             self.z = 0.0
-        elif x == None or y == None or z == None:
-            raise SyntaxError('Error: Value not found for x, y, or z')
+        elif z == None:
+            raise SyntaxError('Error: Point needs an x, y, and z value')
         else:
             self.x = x
             self.y = y
@@ -120,7 +125,7 @@ class Cloud:
     def center_p(self):
         if self.is_empty():
             return None
-        
+
         cloud = self.points
         total_x = total_y = total_z = 0
 
