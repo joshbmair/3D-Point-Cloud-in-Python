@@ -32,7 +32,11 @@ class Point:
 
     def __eq__(self, p):
         if isinstance(p, Point):
-            if abs(self.x - p.x) < Point.EPSILON and abs(self.y - p.y) < Point.EPSILON:
+            dx = abs(self.x - p.x)
+            dy = abs(self.y - p.y)
+            dz = abs(self.z - p.z)
+
+            if dx < Point.EPSILON and dy < Point.EPSILON and dz < Point.EPSILON:
                 return True
             else: return False
         else:
@@ -44,8 +48,9 @@ class Point:
     def euclid_dist(self, p):
         dx = abs(self.x - p.x)
         dy = abs(self.y - p.y)
+        dz = abs(self.z - p.z)
 
-        return (dx**2 + dy**2) ** 0.5
+        return (dx**2 + dy**2 + dz**2) ** 0.5
 
 class Cloud:
     def __init__(self):
