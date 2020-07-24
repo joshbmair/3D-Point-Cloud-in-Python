@@ -122,6 +122,8 @@ class Cloud:
 
         return [left, right, top, bottom, front, back]
 
+    # If cloud is not empty create and return the center point
+    # else return null;
     def center_p(self):
         if self.is_empty():
             return None
@@ -143,6 +145,8 @@ class Cloud:
 
         return Point(avg_x, avg_y, avg_z)
 
+    # Returns minimal distance between 2 points in the cloud
+	# Returns 0.0 for a cloud with less than 2 points
     def min_dist(self):
         if self.size() < 2: return 0.0
 
@@ -156,6 +160,7 @@ class Cloud:
 
         return min_dist
 
+    # TODO Add z coordinate system to crop()
     def crop(self, p0, p1):
         if p0.get_x() < p1.get_x():
             min_x = p0.get_x()
