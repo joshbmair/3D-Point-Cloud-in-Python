@@ -262,7 +262,7 @@ if debug_cloud:
         print(f'Top: {extrs[2]}')
         print(f'Bottom: {extrs[3]}')
     
-    print('Min dist in cloud: {:.5f}'.format(cloud.min_dist()))
+    print('Min dist in cloud: {:.3f}'.format(cloud.min_dist()))
 
     print('Test cloud with one point')
 
@@ -270,6 +270,6 @@ if debug_cloud:
     p = Point()
     cloud1.add_point(p)
 
-    print('Min dist in cloud1: {:.5f}'.format(cloud1.min_dist()))
+    print('Min dist in cloud1: {:.3f}'.format(cloud1.min_dist()))
 else:
     print('Cloud class debug OFF')
