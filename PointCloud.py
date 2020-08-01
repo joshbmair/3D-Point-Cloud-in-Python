@@ -7,7 +7,9 @@ import sys
 import random
 
 class Point:
-    EPSILON = 1.0e-5    # Value close enough to zero for evaluating to points' x, y, and z values
+    # Value close enough to zero for evaluating
+    # two points' x, y, and z values
+    EPSILON = 1.0e-5
 
     def __hash__(self):
         x = int(self.x)
@@ -61,6 +63,9 @@ class Cloud:
     def __str__(self):
         return '[' + ', '.join(map(str, self.points)) + ']'
 
+    def __getitem__(self, a):
+        return list(self.points)[0]
+
     def is_empty(self):
         return len(self.points) == 0
 
@@ -80,10 +85,13 @@ class Cloud:
     # Returns an array of extremes: left, right, top, and bottom of all points in cloud
     # If cloud is empty, returns None
     def extremes(self):
-        if self.is_empty: return None
+        if self.is_empty(): return None
         
         cloud = self.points
-        min_x = max_x = min_y = max_y = max_z = min_z = random.choice(cloud)
+        point = list(cloud)[0]
+        min_x = max_x = point.x 
+        min_y = max_y = point.y
+        min_z = max_z = point.z
 
         for p in cloud:
             if p.x < min_x:
@@ -92,7 +100,7 @@ class Cloud:
                 max_x = p.x
 
             if p.y > max_y:
-                max_x = p.x
+                max_y = p.y
             if p.y < min_y:
                 min_y = p.y
 
