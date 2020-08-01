@@ -103,24 +103,8 @@ class Cloud:
                 max_z = p.z
             if p.z < min_z:
                 min_z = p.z
-        
-        for p in cloud:
-            if p.x < min_x:
-                left = p.x
-            if p.x > max_x:
-                right = p.x
 
-            if p.y > max_y:
-                top = p.y
-            if p.y < min_y:
-                bottom = p.y
-
-            if p.z > max_z:
-                front = p.z
-            if p.z < min_z:
-                back = p.z
-
-        return [left, right, top, bottom, front, back]
+        return [min_x, max_x, max_y, min_y, max_z, min_z]
 
     # If cloud is not empty create and return the center point
     # else return null;
