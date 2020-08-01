@@ -63,9 +63,6 @@ class Cloud:
     def __str__(self):
         return '[' + ', '.join(map(str, self.points)) + ']'
 
-    def __getitem__(self, a):
-        return list(self.points)[0]
-
     def is_empty(self):
         return len(self.points) == 0
 
@@ -229,7 +226,7 @@ if debug_cloud:
     if not cloud.is_empty():
         print('Error: cloud should be empty!')
 
-    if cloud.extremes != None:
+    if cloud.extremes() != None:
         print('Error: extremes should be None!')
 
     if cloud.min_dist() != 0.0:
