@@ -216,7 +216,7 @@ else:
 # TEST CLOUD CLASS #
 ####################
 
-debug_cloud = True
+debug_cloud = False
 if debug_cloud:
     cloud = Cloud()
 
