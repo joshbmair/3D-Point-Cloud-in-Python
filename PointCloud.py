@@ -6,11 +6,8 @@ Date:   7/8/2020
 import sys
 import random
 
-debug_point = False
-debug_cloud = False
-
 class Point:
-    EPSILON = 1.0e-5
+    EPSILON = 1.0e-5    # Value close enough to zero for evaluating to points' x, y, and z values
 
     def __hash__(self):
         x = int(self.x)
@@ -144,7 +141,6 @@ class Cloud:
 
         return min_dist
 
-    # TODO Add z coordinate system to crop()
     def crop(self, p0, p1):
         if p0.get_x() < p1.get_x():
             min_x = p0.get_x()
@@ -160,11 +156,20 @@ class Cloud:
             min_y = p1.get_y()
             max_y = p0.get_y()
 
+        if p0.get_z() < p1.get_z():
+            min_z = p0.get_z()
+            max_z = p1.get_z()
+        else:
+            min_z = p1.get_z()
+            max_z = p0.get_z()
+
         cloud = self.points
         for p in cloud:
             if p.get_x() < min_x or p.get_x() > max_x:
                 cloud.remove(p)
             if p.get_y() < min_y or p.get_y() > max_y:
+                cloud.remove(p)
+            if p.get_z() < min_z or p.get_z() > max_z:
                 cloud.remove(p)
 
 ####################
@@ -252,7 +257,7 @@ if debug_cloud:
         print(f'Top: {extrs[2]}')
         print(f'Bottom: {extrs[3]}')
     
-    print('min dist in cloud: {:.5f}'.format(cloud.min_dist()))
+    print('Min dist in cloud: {:.5f}'.format(cloud.min_dist()))
 
     print('Test cloud with one point')
 
