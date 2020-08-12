@@ -190,7 +190,7 @@ class Cloud:
 # TEST POINT CLASS #
 ####################
 
-debug_point = False
+debug_point = True
 if debug_point:
     print('Point class debug ON')
     print(f'EPSILON: {Point.EPSILON}')
