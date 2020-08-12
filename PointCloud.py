@@ -12,33 +12,33 @@ class Point:
     EPSILON = 1.0e-5
 
     def __hash__(self):
-        x = int(self.x)
-        y = int(self.y)
-        z = int(self.z)
-        s = int(self.x**2 + self.y**2 + self.z**2)
+        x = int(self.__x)
+        y = int(self.__y)
+        z = int(self.__z)
+        s = int(self.__x**2 + self.__y**2 + self.__z**2)
 
         return int(f'{x}{y}{z}{s}')
 
     def __init__(self, x = None, y = None, z = None):
         if x == None and y == None:
-            self.x = 0.0
-            self.y = 0.0
-            self.z = 0.0
+            self.__x = 0.0
+            self.__y = 0.0
+            self.__z = 0.0
         elif z == None:
             raise SyntaxError('Error: Point needs an x, y, and z value')
         else:
-            self.x = x
-            self.y = y
-            self.z = z
+            self.__x = x
+            self.__y = y
+            self.__z = z
     
     def __str__(self):
-        return f'({self.x}, {self.y}, {self.z})'
+        return f'({self.__x}, {self.__y}, {self.__z})'
 
     def __eq__(self, p):
         if isinstance(p, Point):
-            dx = abs(self.x - p.x)
-            dy = abs(self.y - p.y)
-            dz = abs(self.z - p.z)
+            dx = abs(self.__x - p.__x)
+            dy = abs(self.__y - p.__y)
+            dz = abs(self.__z - p.__z)
 
             if dx < Point.EPSILON and dy < Point.EPSILON and dz < Point.EPSILON:
                 return True
@@ -49,10 +49,19 @@ class Point:
     def __ne__(self, p):
         return not self.__eq__(p)
 
+    def get_x(self):
+        return self.__x
+
+    def get_y(self):
+        return self.__y
+
+    def get_z(self):
+        return self.__z
+
     def euclid_dist(self, p):
-        dx = abs(self.x - p.x)
-        dy = abs(self.y - p.y)
-        dz = abs(self.z - p.z)
+        dx = abs(self.__x - p.__x)
+        dy = abs(self.__y - p.__y)
+        dz = abs(self.__z - p.__z)
 
         return (dx**2 + dy**2 + dz**2) ** 0.5
 
@@ -71,7 +80,7 @@ class Cloud:
 
     def has_point(self, p):
         for point in self.points:
-            if p.x == point.x and p.y == point.y and p.z == point.z:
+            if p.get_x() == point.get_x() and p.get_y() == point.get_y() and p.get_z() == point.get_z():
                 return True
         return False
 
@@ -86,25 +95,25 @@ class Cloud:
         
         cloud = self.points
         point = list(cloud)[0]
-        min_x = max_x = point.x 
-        min_y = max_y = point.y
-        min_z = max_z = point.z
+        min_x = max_x = point.get_x()
+        min_y = max_y = point.get_y()
+        min_z = max_z = point.get_z()
 
         for p in cloud:
-            if p.x < min_x:
-                min_x = p.x
-            if p.x > max_x:
-                max_x = p.x
+            if p.get_x() < min_x:
+                min_x = p.get_x()
+            if p.get_x() > max_x:
+                max_x = p.get_x()
 
-            if p.y > max_y:
-                max_y = p.y
-            if p.y < min_y:
-                min_y = p.y
+            if p.get_y() > max_y:
+                max_y = p.get_y()
+            if p.get_y() < min_y:
+                min_y = p.get_y()
 
-            if p.z > max_z:
-                max_z = p.z
-            if p.z < min_z:
-                min_z = p.z
+            if p.get_z() > max_z:
+                max_z = p.get_z()
+            if p.get_z() < min_z:
+                min_z = p.get_z()
 
         return [min_x, max_x, max_y, min_y, max_z, min_z]
 
@@ -118,15 +127,15 @@ class Cloud:
         total_x = total_y = total_z = 0
 
         for p in cloud:
-            total_x += p.x
+            total_x += p.get_x()
         avg_x = total_x / len(cloud)
 
         for p in cloud:
-            total_y += p.y
+            total_y += p.get_y()
         avg_y = total_y / len(cloud)
 
         for p in cloud:
-            total_z += p.z
+            total_z += p.get_z()
         avg_z = total_z / len(cloud)
 
         return Point(avg_x, avg_y, avg_z)
@@ -216,7 +225,7 @@ else:
 # TEST CLOUD CLASS #
 ####################
 
-debug_cloud = False
+debug_cloud = True
 if debug_cloud:
     cloud = Cloud()
 
